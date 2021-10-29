@@ -1,0 +1,19 @@
+package com.example.todolist.kotlinmvvmtodolist.repository
+
+import androidx.lifecycle.LiveData
+import com.example.todolist.kotlinmvvmtodolist.database.TaskDao
+import com.example.todolist.kotlinmvvmtodolist.database.TaskEntry
+
+class TaskRepository(val taskDao: TaskDao) {
+    suspend fun insert(taskEntry: TaskEntry) = taskDao.insert(taskEntry)
+
+    suspend fun updateData(taskEntry: TaskEntry) = taskDao.update(taskEntry)
+
+    suspend fun deleteItem(taskEntry: TaskEntry) = taskDao.delete(taskEntry)
+
+    suspend fun deletaAll() {
+        taskDao.deleteAll()
+    }
+
+    fun getAllTasks() : LiveData<List<TaskEntry>> = taskDao.getAllTasks()
+}
